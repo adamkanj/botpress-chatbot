@@ -1,0 +1,15 @@
+services:
+  botpress:
+    image: ${BOTPRESS_IMAGE:-ghcr.io/botpress/botpress/server:v12_31_10}
+    container_name: botpress-v12-lab
+    restart: unless-stopped
+    ports:
+      - "${BOTPRESS_PORT:-3000}:3000"
+    environment:
+      BP_PRODUCTION: "false"
+      EXTERNAL_URL: "http://localhost:${BOTPRESS_PORT:-3000}"
+    volumes:
+      - botpress_data:/botpress/data
+
+volumes:
+  botpress_data:
