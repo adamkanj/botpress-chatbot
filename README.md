@@ -85,6 +85,19 @@ That means this repo is now best thought of as:
 - a validation artifact for “can Botpress stay internal?”
 - not the final work deployment repo itself
 
+## Current Project Direction
+
+Based on manager guidance, the intended path is:
+
+1. `Phase 1`
+   - deploy and learn the self-hosted Botpress service model
+   - validate what works and what does not in real usage
+2. `Phase 2`
+   - only if needed later, fork the Botpress source and change platform internals
+   - do this only after real usage reveals gaps that configuration and supported extensions cannot solve
+
+So this repo is intentionally optimized for phase 1, not for maintaining a Botpress source fork.
+
 ## Local Architecture
 
 The key architectural point is that Botpress v12's "language server" is not a modern LLM endpoint. It serves tokenization and vectorization assets used by Botpress NLU.

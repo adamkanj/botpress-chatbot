@@ -76,3 +76,14 @@ The first practical milestone should be:
 5. one sample bot that proves the end-to-end service boundary
 
 That is enough to validate the architecture before spending time on heavier customization.
+
+## Phase 2 Trigger
+
+Only consider a Botpress source fork later if phase 1 reveals a real blocker such as:
+
+- required auth or access behavior that cannot be implemented cleanly around the service
+- required admin/editor workflow limits that Botpress cannot support through normal configuration
+- required chatbot behavior that cannot be solved with flows, supported extensions, or a companion local service
+- a proven platform limitation that materially affects the work deployment
+
+Until one of those shows up in real usage, the self-hosted service path remains the preferred approach.

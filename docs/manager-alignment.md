@@ -10,6 +10,19 @@ The best default approach is:
 - configure and secure it for your environment
 - avoid forking Botpress source unless a hard blocker forces that decision
 
+## Current Manager Direction
+
+The current direction is now clearer:
+
+- `phase 1`
+  - use Botpress as a self-hosted service
+  - learn from real usage first
+- `phase 2 later if needed`
+  - fork and modify Botpress source only after you know what the service model cannot handle
+
+That means the team is not choosing between the two paths immediately.
+It is choosing the service path first, and keeping the source-fork path as a later fallback.
+
 ## Why That Direction Fits Better
 
 - it matches the service model where your team hosts chatbot capability and another team consumes it
@@ -47,3 +60,4 @@ The current repo result supports this position:
 - self-hosting Botpress as a service looks viable
 - strict local processing looks much more viable when Botpress uses a self-hosted Botpress language server
 - a local `vLLM` service is optional and should only be added if the chatbot needs model-powered behavior beyond native Botpress flows and NLU
+- a future source fork should be justified by real gaps discovered after phase 1, not by guesswork up front

@@ -87,6 +87,14 @@ For this Botpress project, the order should be:
 3. prove the website team can consume the chatbot as a separate service
 4. only then decide whether a local `vLLM` or `Ollama` sidecar is needed
 
+This also matches the current phased direction:
+
+1. `phase 1 now`
+   - run Botpress as a hosted service
+   - learn its strengths and limits in actual usage
+2. `phase 2 only if needed later`
+   - fork and modify Botpress source if real product gaps justify that cost
+
 If the real chatbot behavior is mostly:
 
 - guided flows
@@ -121,3 +129,4 @@ Keep the work system mentally separated like this:
 - your team hosts the local Botpress language server
 - your team protects the internal Botpress admin side with work auth and role restrictions
 - optional local `vLLM` service is used only by Botpress actions or custom integrations, not as the base Botpress NLU replacement
+- a Botpress source fork is reserved for later only if the hosted-service path proves insufficient
