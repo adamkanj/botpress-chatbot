@@ -1,15 +1,42 @@
 services:
   botpress:
     image: ${BOTPRESS_IMAGE:-ghcr.io/botpress/botpress/server:v12_31_10}
-    container_name: botpress-v12-lab
     restart: unless-stopped
+    init: true
+    stop_grace_period: 20s
+    command: ["./bp"]
     ports:
-      - "${BOTPRESS_PORT:-3000}:3000"
+      - "${BOTPRESS_BIND_HOST:-127.0.0.1}:${BOTPRESS_PORT:-3000}:3000"
     environment:
-      BP_PRODUCTION: "false"
-      EXTERNAL_URL: "http://localhost:${BOTPRESS_PORT:-3000}"
+      BP_PRODUCTION: "${BOTPRESS_PRODUCTION:-false}"
+      EXTERNAL_URL: "${BOTPRESS_EXTERNAL_URL:-http://localhost:3000}"
+      BP_MODULE_NLU_DUCKLINGURL: "http://${BOTPRESS_LANG_HOST:-botpress-lang}:8000"
+      BP_MODULE_NLU_LANGUAGESOURCES: "[{\"endpoint\":\"http://${BOTPRESS_LANG_HOST:-botpress-lang}:${BOTPRESS_LANG_PORT:-3100}\"}]"
+    depends_on:
+      - botpress-lang
     volumes:
       - botpress_data:/botpress/data
+  botpress-lang:
+    image: ${BOTPRESS_IMAGE:-ghcr.io/botpress/botpress/server:v12_31_10}
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 20s
+    user: root
+    command: >
+      /bin/sh -lc '
+      set -e;
+      mkdir -p ${BOTPRESS_LANG_DIR:-/botpress/lang};
+      chown -R botpress:botpress ${BOTPRESS_LANG_DIR:-/botpress/lang};
+      offline_flag="";
+      if [ "${BOTPRESS_LANG_OFFLINE:-false}" = "true" ]; then offline_flag="--offline"; fi;
+      exec runuser -u botpress -- sh -lc "./duckling -p 8000 & exec ./bp lang --langDir ${BOTPRESS_LANG_DIR:-/botpress/lang} --metadataLocation ${BOTPRESS_LANG_METADATA_LOCATION:-/botpress/lang/index.json} --port ${BOTPRESS_LANG_PORT:-3100} --host 0.0.0.0 --dim ${BOTPRESS_LANG_DIM:-100} --domain ${BOTPRESS_LANG_DOMAIN:-bp} $$offline_flag"
+      '
+    expose:
+      - "${BOTPRESS_LANG_PORT:-3100}"
+      - "8000"
+    volumes:
+      - botpress_lang_data:${BOTPRESS_LANG_DIR:-/botpress/lang}
 
 volumes:
   botpress_data:
+  botpress_lang_data:

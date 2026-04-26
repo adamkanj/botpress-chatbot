@@ -153,6 +153,7 @@ At work, the real system will probably look more like this:
 - another team owns the website
 - the website team integrates the chatbot into their frontend
 - users interact through the website, but the chatbot behavior comes from your side
+- internal editors use the private Botpress admin side on your side
 
 So mentally separate:
 
@@ -194,7 +195,7 @@ Because this is legacy Botpress v12, remember:
 
 - some parts may feel dated
 - setup may be awkward
-- some features may rely on external Botpress services
+- default Botpress relies on external Botpress language infrastructure unless you replace it
 - local testing is useful even if the real deployment later changes
 
 So do not judge the whole idea only by polish. Focus on understanding the architecture and workflow.

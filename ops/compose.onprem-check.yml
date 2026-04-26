@@ -1,0 +1,21 @@
+services:
+  botpress:
+    extra_hosts:
+      - "lang-01.botpress.io=127.0.0.1"
+      - "lang-01.botpress.io=[::1]"
+      - "duckling.botpress.io=127.0.0.1"
+      - "duckling.botpress.io=[::1]"
+      - "license.botpress.io=127.0.0.1"
+      - "license.botpress.io=[::1]"
+      - "nyc3.digitaloceanspaces.com=127.0.0.1"
+      - "nyc3.digitaloceanspaces.com=[::1]"
+  botpress-lang:
+    extra_hosts:
+      - "lang-01.botpress.io=127.0.0.1"
+      - "lang-01.botpress.io=[::1]"
+      - "duckling.botpress.io=127.0.0.1"
+      - "duckling.botpress.io=[::1]"
+      - "license.botpress.io=127.0.0.1"
+      - "license.botpress.io=[::1]"
+      - "nyc3.digitaloceanspaces.com=127.0.0.1"
+      - "nyc3.digitaloceanspaces.com=[::1]"

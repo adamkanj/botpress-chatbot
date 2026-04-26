@@ -1,40 +1,40 @@
 # Integration Observations
 
-This file is here so you can turn local testing into better instincts for the real project later.
+This file is here so you can turn local testing into a cleaner service boundary for work later.
 
-## What To Observe During Learning
+## Working Assumption
 
-While testing local Botpress v12, note:
+The most likely work shape is:
 
-- how webchat is exposed locally
-- whether it looks like a hosted widget, script include, or something else
-- what configuration would likely need to be shared with another team
-- whether the chatbot seems easy or awkward to embed into an existing website
+- the website/application team owns their own repo and page release process
+- your team owns the chatbot runtime and behavior
+- their pages connect to your chatbot service instead of sharing code with your repo
 
-## Likely Real-World Boundary
+## What To Observe Locally
 
-Based on your current understanding, the website team would probably:
+While testing Botpress locally, keep notes on:
 
-- keep ownership of their frontend repo
-- add the chatbot integration on their side
-- control when website changes are released
+- how the webchat or public chat path is exposed
+- what URL or config another team would need from you
+- whether the public chat side can stay separate from the internal admin side
+- whether the integration feels widget-based, endpoint-based, or both
 
-Your team would probably:
+## Work Questions To Answer Later
 
-- host the chatbot runtime
-- configure bot behavior and content
-- own chatbot-side updates
-- document how the website team should connect to it
-
-## Questions To Answer Later
-
-- What exact webchat embed method does Botpress v12 support?
-- Does embedding require a public base URL?
-- What domain or CORS settings are needed?
-- Can user/session context be passed safely into the chatbot?
-- How much UI customization would the website team want?
+- What exact integration method should the website team use?
+- Does Botpress require a public base URL for that method?
+- What proxy, domain, and CORS rules are needed?
+- Can the client-facing application pass user or session context safely?
+- How much visual customization would the website/application team need?
+- Should your team expose raw Botpress webchat, or place a thinner integration layer in front of it?
 
 ## What Counts As Success Here
 
-Success in this sandbox is not solving integration. It is understanding enough of Botpress to ask better questions when the real work begins.
+Success in this repo is not fully solving integration.
 
+Success is being able to say:
+
+- what your team would host
+- what the website team would consume
+- what internal URLs stay private
+- what public/chat-facing path would be exposed
